@@ -43,7 +43,7 @@ class Gwt2PluginConvention {
     }
 
     void setGwtVersion(String version) {
-        project.logger.warn("gwtVersion Not Supported, explicitly define dependenices")
+        project.logger.warn("gwtVersion Not Supported, explicitly define dependencies")
     }
 
 }
