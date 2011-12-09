@@ -22,6 +22,7 @@ repositories {
 allprojects {
     apply plugin: 'idea'
     apply plugin: 'groovy'
+    apply plugin: 'maven'
 
     group = 'net.desource.gradle'
     artifactId = 'gradle-gwt-plugin'
@@ -73,3 +74,6 @@ task wrapper ( type : Wrapper ) {
   gradleVersion = '1.0-milestone-3'
   jarFile = 'wrapper/gradle-wrapper.jar'
 }
+
+install.dependsOn ':assemble'
+
