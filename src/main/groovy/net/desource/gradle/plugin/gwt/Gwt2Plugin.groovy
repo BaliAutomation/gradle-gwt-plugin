@@ -78,10 +78,10 @@ class Gwt2Plugin implements Plugin<Project> {
 
             task.conventionMapping.modules = { project.convention.getPlugin(Gwt2PluginConvention.class).gwtModules }
 
-            task.buildDir = project.file("build/gwt/out")
-            task.workDir  = project.file("build/gwt/work")
-            task.extraDir = project.file("build/gwt/extra")
-            task.genDir   = project.file("build/gwt/extra")
+            task.buildDir = new File(project.getBuildDir(), 'gwt/out')
+            task.workDir  = new File(project.getBuildDir(), 'gwt/work')
+            task.extraDir = new File(project.getBuildDir(), 'gwt/extra')
+            task.genDir   = new File(project.getBuildDir(), 'gwt/extra')
 
             task.conventionMapping.classpath = {
                 SourceSet mainSourceSet = project.convention.getPlugin(JavaPluginConvention.class).sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME)
@@ -129,7 +129,7 @@ class Gwt2Plugin implements Plugin<Project> {
     void addSyncCompiledGwtTask(Project project) {
 
         project.tasks.withType(SyncCompiledGwt.class).all { SyncCompiledGwt task ->
-            task.gwtBuildDir = project.file("build/gwt/out")
+            task.gwtBuildDir = new File(project.getBuildDir(), 'gwt/out')
             task.webappBase = getWebappDir(project)
         }
 
