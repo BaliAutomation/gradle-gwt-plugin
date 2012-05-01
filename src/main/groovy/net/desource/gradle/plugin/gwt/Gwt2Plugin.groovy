@@ -87,7 +87,7 @@ class Gwt2Plugin implements Plugin<Project> {
                 SourceSet mainSourceSet = project.convention.getPlugin(JavaPluginConvention.class).sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME)
                 project.files(mainSourceSet.resources.srcDirs,
                               mainSourceSet.java.srcDirs,
-                              mainSourceSet.classesDir,
+                              mainSourceSet.output.classesDir,
                               mainSourceSet.compileClasspath);
             }
 

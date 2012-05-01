@@ -13,60 +13,51 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
 defaultTasks 'assemble'
 
+sourceCompatibility = 1.6
+
+version = '0.3.1-SNAPSHOT'
+
+group = 'net.desource.gradle'
+artifactId = 'gradle-gwt-plugin'
+
 repositories {
-    mavenRepo(urls: 'http://repo.gradle.org/gradle/libs')
+  maven {
+    url = 'http://repo.gradle.org/gradle/libs'
+  }
 }
-
-allprojects {
-    apply plugin: 'idea'
-    apply plugin: 'groovy'
-    apply plugin: 'maven'
-
-    group = 'net.desource.gradle'
-    artifactId = 'gradle-gwt-plugin'
-    version = '0.3-SNAPSHOT'
-}
-
-libraries = [
-        hamcrest_core: 'org.hamcrest:hamcrest-core:1.1@jar',
-        hamcrest_lib:  'org.hamcrest:hamcrest-library:1.1@jar',
-        objenesis:     'org.objenesis:objenesis:1.2@jar',
-        junit:         'junit:junit:4.8.2',
-        cglib:         'cglib:cglib-nodep:2.2@jar',
-        slf4j_api:     'org.slf4j:slf4j-api:1.6.1@jar',
-        slf4j_jdk14:   'org.slf4j:slf4j-jdk14:1.6.1@jar',
-]
-
-libraries.jmock = [ 'org.jmock:jmock:2.5.1@jar',
-                    'org.jmock:jmock-junit4:2.5.1@jar',
-                    'org.jmock:jmock-legacy:2.5.1@jar',
-                    libraries.hamcrest_core,
-                    libraries.hamcrest_lib,
-                    libraries.objenesis,
-                    libraries.cglib ]
 
 dependencies {
 
-    groovy localGroovy();
+  groovy localGroovy();
 
-    compile gradleApi()
+  compile gradleApi()
 
-    testCompile libraries.junit, libraries.jmock, libraries.slf4j_jdk14
-
+  testCompile 'junit:junit:4.10',
+					    'org.jmock:jmock:2.5.1@jar',
+					    'org.jmock:jmock-junit4:2.5.1@jar',
+					    'org.jmock:jmock-legacy:2.5.1@jar',
+					    'org.hamcrest:hamcrest-core:1.2.1@jar',
+					    'org.hamcrest:hamcrest-library:1.2.1@jar',
+					    'org.objenesis:objenesis:1.2@jar',
+					    'cglib:cglib-nodep:2.2@jar',
+					    'org.slf4j:slf4j-simple:1.6.4@jar'
 }
 
 idea {
-    module {
-        excludeDirs += file('repo/')
-        excludeDirs += file('wrapper/')
-    }
+  module {
+    excludeDirs += file('repo/')
+    excludeDirs += file('wrapper/')
+  }
 
-    project {
-        wildcards += ['?*.gradle']
-        javaVersion = '1.6'
-    }
+  project {
+    wildcards += ['?*.gradle']
+  }
 }
 
 //  Wrapper stuff.
