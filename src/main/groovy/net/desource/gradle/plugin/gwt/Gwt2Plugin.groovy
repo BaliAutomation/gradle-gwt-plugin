@@ -193,7 +193,7 @@ class Gwt2Plugin implements Plugin<Project> {
                 war.doFirst {
                     copyAction.rootSpec.eachFile { details ->
                         if (details.path.matches(excludePattern)) {
-                            war.getLogger().debug("Excluding : {}", details.path);
+                            war.getLogger().info("Excluding : {}", details.path);
                             details.exclude()
                         }
                     }
