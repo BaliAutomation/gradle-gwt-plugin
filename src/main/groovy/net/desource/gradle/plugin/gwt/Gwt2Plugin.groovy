@@ -156,7 +156,7 @@ class Gwt2Plugin implements Plugin<Project> {
                               testSourceSet.runtimeClasspath,
                               mainSourceSet.resources.srcDirs,
                               mainSourceSet.java.srcDirs,
-                              mainSourceSet.classesDir,
+                              mainSourceSet.output.classesDir,
                               mainSourceSet.compileClasspath);
             }
 
